@@ -19,7 +19,7 @@ describe('products model layer unit test', function () {
       id: 1,
       name: "Martelo de Thor"
     };
-    sinon.stub(connection, 'execute').resolves([product]);
+    sinon.stub(connection, 'execute').resolves([[product]]);
     const result = await productsModel.findProductById(1);
     expect(result).to.be.deep.equal(productById);
   });
