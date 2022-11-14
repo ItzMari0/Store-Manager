@@ -27,4 +27,26 @@ describe('products service layer unit test', function () {
     expect(list.message instanceof Array).to.equal(true);
     expect(list.message).to.be.deep.equal([products]);
   });
+  describe('Adding a new product', function () {
+    it('successfully adds the product', async function () {
+      const newProductName = { name: "ProdutoX" };
+      const newProduct = {
+        id: 4,
+        name: "ProdutoX"
+      };
+      sinon.stub(productsModel, 'addProduct').resolves([{ insertId: 4 }]);
+      sinon.stub(productsModel, 'findProductById').resolves(newProduct);
+      const result = await productsService.createProduct(newProductName);
+      expect(result.type).to.equal(null);
+      expect(result.message).to.be.deep.equal(newProduct);
+    });
+    it('product validation', async function () {
+      const newProductName = { name: "Prod" };
+      sinon.stub(productsModel, 'addProduct').resolves([{ insertId: 4 }]);
+      sinon.stub(productsModel, 'findProductById').resolves(undefined);
+      const result = await productsService.createProduct(newProductName);
+      expect(result.type).to.equal(422);
+      expect(result.message).to.be.deep.equal('"name" length must be at least 5 characters long');
+    });
+  });
 });

@@ -50,4 +50,23 @@ describe('products controller layer unit test', function () {
     expect(res.status).to.have.been.calledOnceWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
   });
+  it('adds a product', async function () {
+    const newProduct = {
+      id: 4,
+      name: "ProdutoX"
+    };
+    const newProductResponse = { type: null, message: newProduct };
+
+    sinon.stub(productsService, 'createProduct')
+      .resolves({ type: null, message: newProduct });
+    const res = {};
+    const req = { params: { id: 4 } };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productsController.addProduct(req, res);
+    expect(res.status).to.have.been.calledOnceWith(201);
+    expect(res.json).to.have.been.calledWith(newProductResponse.message);
+  });
 });
