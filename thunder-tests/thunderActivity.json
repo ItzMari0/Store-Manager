@@ -1,151 +1,19 @@
 [
   {
-    "_id": "bd7f3a76-fedd-4a2d-b874-5ddf0d7b5102",
+    "_id": "e5bdef89-fc15-4b22-9fb7-cbe56e90065d",
     "colId": "history",
     "containerId": "",
-    "name": "http://localhost:3000/products",
-    "url": "http://localhost:3000/products",
+    "name": "http://localhost:3000/sales",
+    "url": "http://localhost:3000/sales",
     "method": "POST",
     "sortNum": 0,
-    "created": "2022-11-12T15:12:36.517Z",
-    "modified": "2022-11-12T16:37:05.730Z",
-    "headers": [],
-    "params": [],
-    "tests": []
-  },
-  {
-    "_id": "24c75fc2-1304-4727-9702-2eb07e60cf38",
-    "colId": "history",
-    "containerId": "",
-    "name": "http://localhost:3000/products",
-    "url": "http://localhost:3000/products",
-    "method": "GET",
-    "sortNum": 0,
-    "created": "2022-11-12T15:14:52.977Z",
-    "modified": "2022-11-12T15:58:03.000Z",
-    "headers": [],
-    "params": [],
-    "tests": []
-  },
-  {
-    "_id": "efef6ae0-5b55-47f6-a7b0-11eb7f762bc3",
-    "colId": "history",
-    "containerId": "",
-    "name": "http://localhost:3000/products?name=ProdutoX",
-    "url": "http://localhost:3000/products?name=ProdutoX",
-    "method": "POST",
-    "sortNum": 0,
-    "created": "2022-11-12T16:33:19.900Z",
-    "modified": "2022-11-12T16:36:51.892Z",
-    "headers": [],
-    "params": [
-      {
-        "name": "name",
-        "value": "ProdutoX",
-        "isPath": false
-      }
-    ],
-    "tests": []
-  },
-  {
-    "_id": "06440f19-57e8-49c0-8767-730967c2f086",
-    "colId": "history",
-    "containerId": "",
-    "name": "http://localhost:3000/products?name=ProdutoX&id=4",
-    "url": "http://localhost:3000/products?name=ProdutoX&id=4",
-    "method": "POST",
-    "sortNum": 0,
-    "created": "2022-11-12T16:33:46.402Z",
-    "modified": "2022-11-12T16:33:46.419Z",
-    "headers": [],
-    "params": [
-      {
-        "name": "name",
-        "value": "ProdutoX",
-        "isPath": false
-      },
-      {
-        "name": "id",
-        "value": "4",
-        "isPath": false
-      }
-    ],
-    "tests": []
-  },
-  {
-    "_id": "8b2a39fc-17f4-4bcb-9045-e2c99b690f0f",
-    "colId": "history",
-    "containerId": "",
-    "name": "http://localhost:3000/products?id=4&name=ProdutoX",
-    "url": "http://localhost:3000/products?id=4&name=ProdutoX",
-    "method": "POST",
-    "sortNum": 0,
-    "created": "2022-11-12T16:34:08.458Z",
-    "modified": "2022-11-12T16:34:08.474Z",
-    "headers": [],
-    "params": [
-      {
-        "name": "id",
-        "value": "4",
-        "isPath": false
-      },
-      {
-        "name": "name",
-        "value": "ProdutoX",
-        "isPath": false
-      }
-    ],
-    "tests": []
-  },
-  {
-    "_id": "38d6fe08-b630-427f-9d85-793c0de6ae2d",
-    "colId": "history",
-    "containerId": "",
-    "name": "http://localhost:3000/products/4",
-    "url": "http://localhost:3000/products/4",
-    "method": "POST",
-    "sortNum": 0,
-    "created": "2022-11-12T16:37:24.097Z",
-    "modified": "2022-11-12T16:37:24.131Z",
-    "headers": [],
-    "params": [],
-    "tests": []
-  },
-  {
-    "_id": "6d21231c-11e8-42b5-907f-77ab00285df1",
-    "colId": "history",
-    "containerId": "",
-    "name": "http://localhost:3000/products/?name=ProdutoX",
-    "url": "http://localhost:3000/products/?name=ProdutoX",
-    "method": "POST",
-    "sortNum": 0,
-    "created": "2022-11-12T16:37:40.529Z",
-    "modified": "2022-11-12T18:35:04.090Z",
-    "headers": [],
-    "params": [
-      {
-        "name": "name",
-        "value": "ProdutoX",
-        "isPath": false
-      }
-    ],
-    "tests": []
-  },
-  {
-    "_id": "188d0784-1f03-458a-b15a-b4b528d1292b",
-    "colId": "history",
-    "containerId": "",
-    "name": "http://localhost:3000/products/",
-    "url": "http://localhost:3000/products/",
-    "method": "POST",
-    "sortNum": 0,
-    "created": "2022-11-12T19:01:42.607Z",
-    "modified": "2022-11-12T19:14:32.658Z",
+    "created": "2022-11-15T19:49:54.755Z",
+    "modified": "2022-11-15T19:50:24.085Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"ProdutoX\"\n}",
+      "raw": "[\r\n  {\r\n    \"productId\": 1,\r\n    \"quantity\": 1\r\n  },\r\n  {\r\n    \"productId\": 2,\r\n    \"quantity\": 5\r\n  }\r\n]",
       "form": []
     },
     "tests": []
