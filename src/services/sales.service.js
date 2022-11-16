@@ -12,4 +12,22 @@ const salesProducts = async (sales) => {
   return { type: null, message: result };
 };
 
-module.exports = { salesProducts };
+const findAllSales = async () => {
+  const result = await salesModel.findSales();
+  return { type: null, message: result };
+};
+
+const findById = async (id) => {
+  const result = await salesModel.findSaleById(id);
+  console.log(result);
+  if (result.length === 0) {
+    return { type: 404, message: 'Sale not found' };
+  }
+  return { type: null, message: result };
+};
+
+module.exports = {
+  salesProducts,
+  findAllSales,
+  findById,
+};
