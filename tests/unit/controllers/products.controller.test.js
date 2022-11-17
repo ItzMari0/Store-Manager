@@ -7,7 +7,13 @@ chai.use(sinonChai);
 
 const productsService = require('../../../src/services/products.service');
 const productsController = require('../../../src/controllers/products.controller');
-const { products, productById, productsResponse, productByIdResponse, notFound } = require('../models/mocks/products.model.mock');
+const { products,
+  productById,
+  productsResponse,
+  productByIdResponse,
+  notFound,
+  updatedProduct,
+} = require('../models/mocks/products.model.mock');
 
 describe('products controller layer unit test', function () {
   afterEach(sinon.restore);
@@ -68,5 +74,34 @@ describe('products controller layer unit test', function () {
     await productsController.addProduct(req, res);
     expect(res.status).to.have.been.calledOnceWith(201);
     expect(res.json).to.have.been.calledWith(newProductResponse.message);
+  });
+  it('updates a product', async function () {
+    const updated = { type: null, message: updatedProduct };
+
+    sinon.stub(productsService, 'updateProductName')
+      .resolves({ type: null, message: updatedProduct });
+    const res = {};
+    const req = { params: { id: 1 }, body: { name: "Martelo do Batman " } };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productsController.updateProduct(req, res);
+    expect(res.status).to.have.been.calledOnceWith(200);
+    expect(res.json).to.have.been.calledWith(updated.message);
+  });
+  it('deletes a product', async function () {
+    const deleted = { type: null, message: productById };
+
+    sinon.stub(productsService, 'deleteFromList')
+      .resolves({ type: null, message: updatedProduct });
+    const res = {};
+    const req = { params: { id: 1 } };
+
+    res.status = sinon.stub().returns(res);
+    res.send = sinon.stub().returns();
+
+    await productsController.deleteProduct(req, res);
+    expect(res.status).to.have.been.calledOnceWith(204);
   });
 });

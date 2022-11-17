@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const productsModel = require('../../../src/models/products.model');
 const productsService = require('../../../src/services/products.service');
-const { products, productById } = require('../models/mocks/products.model.mock');
+const { products, productById, afterDeleteProducts } = require('../models/mocks/products.model.mock');
 
 describe('products service layer unit test', function () {
   afterEach(sinon.restore);
@@ -47,6 +47,54 @@ describe('products service layer unit test', function () {
       const result = await productsService.createProduct(newProductName);
       expect(result.type).to.equal(422);
       expect(result.message).to.be.deep.equal('"name" length must be at least 5 characters long');
+    });
+  });
+  describe('updating a product', function () {
+    it('name has less than 5 characters', async function () {
+      const name = { "name": "fail" };
+      sinon.stub(productsModel, 'updateProduct').resolves([[name]]);
+      const result = await productsService.updateProductName(name);
+      expect(result.type).to.equal(422);
+      expect(result.message).to.be.deep.equal('"name" length must be at least 5 characters long');
+    });
+    it('product not found', async function () {
+      const notFound = {
+        "id": 5,
+        "name": "Xabláu"
+      };
+      sinon.stub(productsModel, 'updateProduct').resolves(undefined);
+      sinon.stub(productsModel, 'findProductById').resolves(undefined);
+      const result = await productsService.updateProductName(notFound.name, notFound.id);
+      expect(result.type).to.equal(404);
+      expect(result.message).to.be.deep.equal('Product not found');
+    });
+    it('product updated', async function () {
+      const updated = {
+        "id": 1,
+        "name": "Martelo do Batman"
+      };
+      sinon.stub(productsModel, 'updateProduct').resolves(updated);
+      sinon.stub(productsModel, 'findProductById').resolves(1);
+      const result = await productsService.updateProductName(updated.name, 1);
+      expect(result.type).to.equal(null);
+      expect(result.message).to.be.deep.equal(updated);
+    });
+  });
+  describe('Delete function', function () {
+    it('deletes a product', async function () {
+      sinon.stub(productsModel, 'deleteProduct').resolves([productById]);
+      const { type } = await productsService.deleteFromList(1);
+      expect(type).to.equal(null);
+    });
+    it('product not found', async function () {
+      const notFound = {
+        "id": 5,
+        "name": "Xabláu"
+      };
+      sinon.stub(productsModel, 'deleteProduct').resolves(undefined);
+      const result = await productsService.deleteFromList(notFound.id);
+      expect(result.type).to.equal(404);
+      expect(result.message).to.equal('Product not found');
     });
   });
 });

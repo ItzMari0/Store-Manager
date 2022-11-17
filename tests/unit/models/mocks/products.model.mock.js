@@ -13,9 +13,25 @@ const products = [
   },
 ];
 
+const afterDeleteProducts = [
+  {
+    "id": 2,
+    "name": "Traje de encolhimento"
+  },
+  {
+    "id": 3,
+    "name": "Escudo do Capitão América"
+  },
+];
+
 const productById = {
   "id": 1,
   "name": "Martelo de Thor"
+};
+
+const updatedProduct = {
+  "id": 1,
+  "name": "Martelo do Batman"
 };
 
 const productsResponse = { type: null, message: products };
@@ -30,4 +46,6 @@ module.exports = {
   productsResponse,
   productByIdResponse,
   notFound,
+  afterDeleteProducts,
+  updatedProduct,
 };
