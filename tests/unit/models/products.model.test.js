@@ -38,11 +38,9 @@ describe('products model layer unit test', function () {
     expect(result).to.be.deep.equal(expected);
   });
   it('deletes a product', async function () {
-    sinon.stub(connection, 'execute').resolves([[productById]]);
-    await productsModel.deleteProduct(1)
-    sinon.restore();
     sinon.stub(connection, 'execute').resolves([afterDeleteProducts]);
+    await productsModel.deleteProduct(1)
     const result = await productsModel.findAllProducts();
-    expect(result).to.be.deep.equal(afterDeleteProducts);
+    expect(result).not.to.be.deep.equal(products);  
   });
 });

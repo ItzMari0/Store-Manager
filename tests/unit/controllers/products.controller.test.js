@@ -91,10 +91,8 @@ describe('products controller layer unit test', function () {
     expect(res.json).to.have.been.calledWith(updated.message);
   });
   it('deletes a product', async function () {
-    const deleted = { type: null, message: productById };
-
     sinon.stub(productsService, 'deleteFromList')
-      .resolves({ type: null, message: updatedProduct });
+      .resolves({ type: null, message: productById });
     const res = {};
     const req = { params: { id: 1 } };
 

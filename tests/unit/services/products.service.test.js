@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const productsModel = require('../../../src/models/products.model');
 const productsService = require('../../../src/services/products.service');
-const { products, productById, afterDeleteProducts } = require('../models/mocks/products.model.mock');
+const { products, productById } = require('../models/mocks/products.model.mock');
 
 describe('products service layer unit test', function () {
   afterEach(sinon.restore);
@@ -22,7 +22,6 @@ describe('products service layer unit test', function () {
   });
   it('shows the products list', async function () {
     sinon.stub(productsModel, 'findAllProducts').resolves([products]);
-    afterEach(sinon.restore);
     const list = await productsService.findAll();
     expect(list.message instanceof Array).to.equal(true);
     expect(list.message).to.be.deep.equal([products]);
