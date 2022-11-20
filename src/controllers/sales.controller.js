@@ -37,9 +37,28 @@ const deleteSale = async (req, res) => {
   return res.status(204).send();
 };
 
+const updateSale = async (req, res) => {
+  const sales = req.body;
+  const { id } = req.params;
+  const validation = await idquantityValidation(sales);
+  const validated = validation.every((product) => product === 'requirement ok');
+  if (validated) {
+    const { type, message } = await salesService.updateSaleDetail(id, sales);
+    if (type) return res.status(type).json({ message });
+    return res.status(200).json(message);
+  }
+  if (validation.includes('missing product id')) {
+    return res.status(400).json({ message: '"productId" is required' });
+  }
+  if (validation.includes('missing product quantity')) {
+    return res.status(400).json({ message: '"quantity" is required' });
+  }
+};
+
 module.exports = {
   salesList,
   findSales,
   findSaleById,
   deleteSale,
+  updateSale,
 };
